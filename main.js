@@ -8,14 +8,6 @@ let items = [
   "ガーリック",
 ];
 
-//文字列をノードに変換する
-function htmlToNode(html) {
-  let tmpElm = document.createElement('div');
-  tmpElm.innerHTML = html;
-  return tmpElm.firstElementChild;
-}
-
-
 function createItems() {
  
 //エレメント生成、クラスとIDを設定
