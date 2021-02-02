@@ -1,15 +1,12 @@
 const ul = document.querySelector('ul');
-// const itemValue = document.getElementById('item_value');
-// const vItemValue = document.getElementById('v_item_value');
 
-//バーの数値を数字で表示する
-// vItemValue.addEventListener('input' , ()=>{
-//   itemValue.innerText = vItemValue.value;
-// })
-
-
-let items = ["コリアンダー","カイエンペッパー","ターメリック","ガラムマサラ","クミン","ガーリック"]
-
+let items = [
+  "コリアンダー",
+  "カイエンペッパー",
+  "ターメリック",
+  "クミン",
+  "ガーリック",
+];
 
 //文字列をノードに変換する
 function htmlToNode(html) {
@@ -19,34 +16,50 @@ function htmlToNode(html) {
 }
 
 
-function createItems () {
-  for(let i = 0 ; i < items.length ; i++) {
-    const liElm =  `<li class="item_list${i}">` +
-      `<label id="item${i}">${items[i]}</label>` +
-        `<input type="range" name="" id="item${i}">` +
-      `<span id="item_value${i}">50</span>` +
-    `</li>` ;
-    let node = htmlToNode(liElm);
-    ul.appendChild(node);
+function createItems() {
+ 
+//エレメント生成、クラスとIDを設定
+// appendChildで要素を追加
+for(let i = 0 ; i < items.length ; i++) {
+    const liElm = document.createElement('li')
+    liElm.className = `item_list${i}`
 
+    const labelElm = document.createElement('label');
+    labelElm.id = `item${i}`
+    labelElm.innerText = `${items[i]}`
+    
+    const imputElm = document.createElement('input')
+    imputElm.id = `item${i}`
+    imputElm.type = "range"
+
+    const spanElm = document.createElement('span')
+    spanElm.id = `item_value${i}`
+    spanElm.innerText =50;
+
+    liElm.appendChild(labelElm);
+    liElm.appendChild(imputElm);
+    liElm.appendChild(spanElm);
+
+    ul.appendChild(liElm);
+    
   }
 }
 
 createItems();
 
 //それぞれのバーにイベントを設定>数値とバーの入力値を同期
-for(let i = 0 ; i <items.length ; i++){
+for (let i = 0; i < items.length; i++) {
   const li = document.querySelectorAll("li")[i]
-  
-  const input =document.querySelectorAll('input')[i];
-  
-  const span =document.querySelectorAll('span')[i];
-  
-  
+
+  const input = document.querySelectorAll('input')[i];
+
+  const span = document.querySelectorAll('span')[i];
+
+
   //バーの数値を数字で表示する
-  input.addEventListener('input' , ()=>{
-  span.innerText = input.value;
-  }) 
-  
+  input.addEventListener('input', () => {
+    span.innerText = input.value;
+  })
+
 }
 
